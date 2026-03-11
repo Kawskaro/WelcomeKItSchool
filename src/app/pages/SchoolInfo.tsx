@@ -2,6 +2,7 @@ import {
   Calendar,
   CheckCircle,
   Clock,
+  HelpCircle,
   Mail,
   MapPin,
   Phone,
@@ -123,6 +124,14 @@ export function SchoolInfo() {
                 9:00 - 14:00
               </span>
             </div>
+            <div className="flex items-center justify-between">
+              <span className="text-lg font-medium text-slate-600">
+                {t("schoolInfo.support")}
+              </span>
+              <span className="text-lg font-bold text-slate-900">
+                10:00 - 16:00
+              </span>
+            </div>
           </div>
         </div>
 
@@ -152,6 +161,36 @@ export function SchoolInfo() {
                 <p className="text-base leading-relaxed text-slate-700">
                   {rule}
                 </p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
+          <div className="mb-4 flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <div className="rounded-full bg-sky-100 p-3 text-sky-700">
+                <HelpCircle size={28} />
+              </div>
+              <h3 className="text-xl font-bold text-slate-800">
+                {t("schoolInfo.faqTitle")}
+              </h3>
+            </div>
+            <AudioButton text={t("schoolInfo.faqTitle")} className="shrink-0" />
+          </div>
+
+          <div className="space-y-3">
+            {[
+              t("schoolInfo.faq1"),
+              t("schoolInfo.faq2"),
+              t("schoolInfo.faq3"),
+              t("schoolInfo.faq4"),
+            ].map((question) => (
+              <div
+                key={question}
+                className="rounded-2xl bg-slate-50 p-4 text-sm leading-relaxed text-slate-700"
+              >
+                {question}
               </div>
             ))}
           </div>

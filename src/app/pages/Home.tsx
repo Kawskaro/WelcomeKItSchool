@@ -10,6 +10,7 @@ import { AudioButton } from "../components/AudioButton";
 
 export function Home() {
   const { t } = useTranslation();
+  const tips = [t("home.tip1"), t("home.tip2"), t("home.tip3")];
 
   return (
     <div className="mx-auto flex w-full max-w-lg flex-1 flex-col items-center p-5 pb-10">
@@ -25,6 +26,31 @@ export function Home() {
             {t("home.subtitle")}
           </p>
           <AudioButton text={t("home.subtitle")} />
+        </div>
+      </div>
+
+      <div className="mb-6 w-full rounded-3xl border border-blue-200 bg-blue-50 p-5 shadow-sm">
+        <div className="mb-3 flex items-start justify-between gap-3">
+          <div>
+            <h3 className="text-xl font-bold text-blue-950">
+              {t("home.rightTitle")}
+            </h3>
+            <p className="mt-2 text-base leading-relaxed text-blue-900">
+              {t("home.rightDesc")}
+            </p>
+          </div>
+          <AudioButton
+            text={`${t("home.rightTitle")}. ${t("home.rightDesc")}`}
+            className="shrink-0"
+          />
+        </div>
+
+        <div className="space-y-2 pt-2">
+          {tips.map((tip) => (
+            <p key={tip} className="text-sm leading-relaxed text-blue-900">
+              • {tip}
+            </p>
+          ))}
         </div>
       </div>
 

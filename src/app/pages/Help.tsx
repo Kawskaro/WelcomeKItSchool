@@ -13,6 +13,12 @@ export function Help() {
   const { t } = useTranslation();
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const quickIssues = [
+    t("helpPage.quick1"),
+    t("helpPage.quick2"),
+    t("helpPage.quick3"),
+    t("helpPage.quick4"),
+  ];
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -74,6 +80,29 @@ export function Help() {
               text={t("helpPage.subtitle")}
               className="shrink-0"
             />
+          </div>
+        </div>
+
+        <div className="mb-6 rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
+          <div className="mb-4 flex items-center justify-between">
+            <h3 className="text-xl font-bold text-slate-900">
+              {t("helpPage.quickTitle")}
+            </h3>
+            <AudioButton
+              text={t("helpPage.quickTitle")}
+              className="shrink-0"
+            />
+          </div>
+
+          <div className="space-y-3">
+            {quickIssues.map((issue) => (
+              <div
+                key={issue}
+                className="rounded-2xl bg-slate-50 p-4 text-sm leading-relaxed text-slate-700"
+              >
+                {issue}
+              </div>
+            ))}
           </div>
         </div>
 
@@ -172,7 +201,7 @@ export function Help() {
               </div>
               <div>
                 <p className="text-sm font-medium text-white/70">
-                  {t("schoolInfo.phone")}
+                  {t("helpPage.schoolChannel")}
                 </p>
                 <p className="text-lg font-bold">+56 2 2345 6789</p>
               </div>
@@ -184,9 +213,12 @@ export function Help() {
               </div>
               <div>
                 <p className="text-sm font-medium text-white/70">
-                  {t("schoolInfo.email")}
+                  {t("helpPage.officialChannel")}
                 </p>
-                <p className="text-lg font-bold">info@escuela.cl</p>
+                <p className="text-lg font-bold">ayuda@escuela.cl</p>
+                <p className="mt-1 text-sm text-white/70">
+                  {t("helpPage.officialChannelDesc")}
+                </p>
               </div>
             </div>
           </div>

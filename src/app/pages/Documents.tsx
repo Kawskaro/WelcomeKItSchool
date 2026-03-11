@@ -1,4 +1,4 @@
-import { AlertCircle, FileText } from "lucide-react";
+import { AlertCircle, CheckCircle2, FileText, KeyRound } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { AudioButton } from "../components/AudioButton";
 
@@ -7,37 +7,37 @@ export function Documents() {
 
   const requiredDocs = [
     {
-      id: "birthCert",
-      titleKey: "documents.birthCert",
-      descKey: "documents.birthCertDesc",
+      id: "studentId",
+      titleKey: "documents.studentId",
+      descKey: "documents.studentIdDesc",
     },
     {
-      id: "idParent",
-      titleKey: "documents.idParent",
-      descKey: "documents.idParentDesc",
+      id: "guardianId",
+      titleKey: "documents.guardianId",
+      descKey: "documents.guardianIdDesc",
     },
     {
-      id: "proofAddress",
-      titleKey: "documents.proofAddress",
-      descKey: "documents.proofAddressDesc",
+      id: "entryDoc",
+      titleKey: "documents.entryDoc",
+      descKey: "documents.entryDocDesc",
     },
   ];
 
   const optionalDocs = [
     {
-      id: "immunization",
-      titleKey: "documents.immunization",
-      descKey: "documents.immunizationDesc",
+      id: "previousStudies",
+      titleKey: "documents.previousStudies",
+      descKey: "documents.previousStudiesDesc",
     },
     {
-      id: "prevSchool",
-      titleKey: "documents.prevSchool",
-      descKey: "documents.prevSchoolDesc",
+      id: "vaccines",
+      titleKey: "documents.vaccines",
+      descKey: "documents.vaccinesDesc",
     },
     {
-      id: "photos",
-      titleKey: "documents.photos",
-      descKey: "documents.photosDesc",
+      id: "address",
+      titleKey: "documents.address",
+      descKey: "documents.addressDesc",
     },
   ];
 
@@ -49,11 +49,57 @@ export function Documents() {
           <AudioButton text={t("documents.title")} className="shrink-0" />
         </div>
         <p className="mt-2 text-lg text-emerald-100">
-          {t("home.documentsDesc")}
+          {t("documents.introDesc")}
         </p>
       </div>
 
       <div className="mt-6 px-5">
+        <div className="mb-6 rounded-3xl border border-emerald-200 bg-white p-5 shadow-sm">
+          <div className="mb-4 flex items-center justify-between gap-3">
+            <div className="flex items-center gap-3">
+              <div className="rounded-full bg-emerald-100 p-3 text-emerald-700">
+                <KeyRound size={24} />
+              </div>
+              <h3 className="text-xl font-bold text-slate-900">
+                {t("documents.identifierTitle")}
+              </h3>
+            </div>
+            <AudioButton
+              text={t("documents.identifierTitle")}
+              className="shrink-0"
+            />
+          </div>
+
+          <div className="space-y-3">
+            <div className="rounded-2xl bg-emerald-50 p-4">
+              <p className="font-bold text-emerald-900">
+                {t("documents.ipeTitle")}
+              </p>
+              <p className="mt-1 text-sm leading-relaxed text-emerald-900">
+                {t("documents.ipeDesc")}
+              </p>
+            </div>
+
+            <div className="rounded-2xl bg-blue-50 p-4">
+              <p className="font-bold text-blue-900">
+                {t("documents.ipaTitle")}
+              </p>
+              <p className="mt-1 text-sm leading-relaxed text-blue-900">
+                {t("documents.ipaDesc")}
+              </p>
+            </div>
+
+            <div className="rounded-2xl bg-amber-50 p-4">
+              <p className="font-bold text-amber-900">
+                {t("documents.studiesTitle")}
+              </p>
+              <p className="mt-1 text-sm leading-relaxed text-amber-900">
+                {t("documents.studiesDesc")}
+              </p>
+            </div>
+          </div>
+        </div>
+
         <div className="mb-6 rounded-2xl border border-amber-200 bg-amber-50 p-5 shadow-sm">
           <div className="flex items-start gap-3">
             <AlertCircle className="mt-1 shrink-0 text-amber-600" size={24} />
@@ -148,6 +194,34 @@ export function Documents() {
               </div>
             );
           })}
+        </div>
+
+        <div className="mt-8 rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
+          <div className="mb-4 flex items-center justify-between">
+            <h3 className="text-xl font-bold text-slate-900">
+              {t("documents.introTitle")}
+            </h3>
+            <AudioButton
+              text={`${t("documents.introTitle")}. ${t("documents.introDesc")}`}
+              className="shrink-0"
+            />
+          </div>
+
+          <div className="space-y-3">
+            {[
+              t("documents.introDesc"),
+              t("documents.ipeDesc"),
+              t("documents.studiesDesc"),
+            ].map((item) => (
+              <div key={item} className="flex items-start gap-3">
+                <CheckCircle2
+                  className="mt-0.5 shrink-0 text-emerald-600"
+                  size={18}
+                />
+                <p className="text-sm leading-relaxed text-slate-700">{item}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>
