@@ -1,13 +1,19 @@
 import { ChevronDown, ChevronUp, CheckCircle2, Circle } from "lucide-react";
 import { motion } from "motion/react";
-import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { AudioButton } from "../components/AudioButton";
+import { useLocalStorage } from "../hooks/useLocalStorage";
 
 export function Steps() {
   const { t } = useTranslation();
-  const [completed, setCompleted] = useState<number[]>([]);
-  const [expandedStep, setExpandedStep] = useState<number | null>(null);
+  const [completed, setCompleted] = useLocalStorage<number[]>(
+    "welcome-kit.steps.completed",
+    []
+  );
+  const [expandedStep, setExpandedStep] = useLocalStorage<number | null>(
+    "welcome-kit.steps.expanded",
+    null
+  );
 
   const steps = [
     {

@@ -8,11 +8,30 @@ import {
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { AudioButton } from "../components/AudioButton";
+import { useLocalStorage } from "../hooks/useLocalStorage";
+
+type HelpDraft = {
+  name: string;
+  phone: string;
+  email: string;
+  message: string;
+};
+
+const emptyDraft: HelpDraft = {
+  name: "",
+  phone: "",
+  email: "",
+  message: "",
+};
 
 export function Help() {
   const { t } = useTranslation();
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [draft, setDraft] = useLocalStorage<HelpDraft>(
+    "welcome-kit.help.draft",
+    emptyDraft
+  );
   const quickIssues = [
     t("helpPage.quick1"),
     t("helpPage.quick2"),
@@ -27,8 +46,20 @@ export function Help() {
     window.setTimeout(() => {
       setSubmitted(true);
       setIsSubmitting(false);
+      setDraft(emptyDraft);
     }, 1000);
   };
+
+  const updateDraft =
+    (field: keyof HelpDraft) =>
+    (
+      event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    ) => {
+      setDraft((current) => ({
+        ...current,
+        [field]: event.target.value,
+      }));
+    };
 
   if (submitted) {
     return (
@@ -121,6 +152,8 @@ export function Help() {
               type="text"
               id="name"
               required
+              value={draft.name}
+              onChange={updateDraft("name")}
               placeholder={t("helpPage.namePlaceholder")}
               className="w-full rounded-2xl border border-slate-300 bg-slate-50 px-4 py-4 text-lg text-slate-800 transition-all focus:border-transparent focus:ring-2 focus:ring-blue-500 focus:outline-none"
             />
@@ -137,6 +170,8 @@ export function Help() {
               type="tel"
               id="phone"
               required
+              value={draft.phone}
+              onChange={updateDraft("phone")}
               placeholder={t("helpPage.phonePlaceholder")}
               className="w-full rounded-2xl border border-slate-300 bg-slate-50 px-4 py-4 text-lg text-slate-800 transition-all focus:border-transparent focus:ring-2 focus:ring-blue-500 focus:outline-none"
             />
@@ -152,6 +187,8 @@ export function Help() {
             <input
               type="email"
               id="email"
+              value={draft.email}
+              onChange={updateDraft("email")}
               placeholder={t("helpPage.emailPlaceholder")}
               className="w-full rounded-2xl border border-slate-300 bg-slate-50 px-4 py-4 text-lg text-slate-800 transition-all focus:border-transparent focus:ring-2 focus:ring-blue-500 focus:outline-none"
             />
@@ -168,6 +205,8 @@ export function Help() {
               id="message"
               required
               rows={4}
+              value={draft.message}
+              onChange={updateDraft("message")}
               placeholder={t("helpPage.messagePlaceholder")}
               className="w-full resize-none rounded-2xl border border-slate-300 bg-slate-50 px-4 py-4 text-lg text-slate-800 transition-all focus:border-transparent focus:ring-2 focus:ring-blue-500 focus:outline-none"
             />
